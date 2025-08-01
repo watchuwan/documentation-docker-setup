@@ -219,10 +219,10 @@ RUN chown -R www-data:www-data /var/www/html/storage \
 EXPOSE 9000
 
 CMD ["php-fpm"]
-
+```
 docker/nginx/default.conf
 Konfigurasi Nginx ini sama untuk kedua lingkungan, karena ia menangani permintaan ke PHP-FPM dan juga proxy ke Vite.
-
+```bash
 server {
     listen 80;
     server_name localhost;
