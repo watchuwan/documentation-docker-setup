@@ -45,8 +45,6 @@ services:
     image: crud-vue-app
     volumes:
       - .:/var/www/html
-    ports:
-      - "5173:5173"
     environment:
       APP_NAME: crud-vue-app
       APP_ENV: local
@@ -75,6 +73,20 @@ services:
     volumes:
       - .:/var/www/html
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  # Service Vite untuk pengembangan
+  vite:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "5173:5173"
+    command: npm run dev
+    working_dir: /var/www/html
     depends_on:
       - app
 
@@ -287,6 +299,7 @@ composer install
 composer require laravel/breeze --dev
 php artisan breeze:install vue
 npm install
+npm install --legacy-peer-deps
 ```
 composer require laravel/breeze --dev: Menginstal paket Laravel Breeze.
 
