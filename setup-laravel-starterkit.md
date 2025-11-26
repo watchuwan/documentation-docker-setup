@@ -47,3 +47,14 @@ docker build -t laravel-installer-image .
 terus buat proyek dengan command berikut
 
 ``docker run --rm -it -v $(pwd):/var/www/html laravel-installer-image laravel new``
+
+atau bisa juga
+
+```bash
+docker run --rm -it -v $(pwd):/app composer bash -lc "
+    composer global require laravel/installer && \
+    export PATH=\$PATH:/tmp/vendor/bin:/tmp/composer/vendor/bin && \
+    cd /app && \
+    laravel new
+"
+```
